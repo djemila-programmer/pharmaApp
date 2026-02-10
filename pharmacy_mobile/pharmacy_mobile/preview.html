@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Mobile App - Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00796B, #004D40);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            color: #00796B;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .screens-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+        
+        .screens-section h2 {
+            color: #00796B;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 12px 30px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .tab:hover {
+            background: #e0e0e0;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #00796B, #004D40);
+            color: white;
+        }
+        
+        .screen-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .screen-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .phone-mockup {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 8px solid #333;
+        }
+        
+        .screen {
+            border-radius: 25px;
+            overflow: hidden;
+            background: #F5F5F5;
+        }
+        
+        .app-bar {
+            background: #00796B;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .app-bar h3 {
+            font-size: 20px;
+        }
+        
+        .screen-body {
+            padding: 20px;
+            min-height: 500px;
+        }
+        
+        .stat-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00796B;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .list-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .list-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .list-item-subtitle {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .badge-critical {
+            background: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .badge-warning {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .badge-success {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 10px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .nav-item.active {
+            color: #00796B;
+        }
+        
+        .tech-stack {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .tech-stack h2 {
+            color: #00796B;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                font-size: 14px;
+            }
+            
+            .tab {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💊 Pharmacy Mobile App</h1>
+            <p>Complete Stock & Sales Management System</p>
+        </header>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Batch Tracking</h3>
+                <p>Scanner et suivre chaque lot de médicaments avec des codes QR. Gestion complète des numéros de lot et traçabilité totale.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3>Prescriptions</h3>
+                <p>Gérer les ordonnances des patients, valider les prescriptions médicales et suivre leur statut en temps réel.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">⚠️</div>
+                <h3>Expiry Alerts</h3>
+                <p>Alertes automatiques pour les médicaments qui approchent de leur date d'expiration. Évitez les pertes financières.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Sales Management</h3>
+                <p>Enregistrement rapide des ventes, génération de reçus et rapports de ventes détaillés avec statistiques en temps réel.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🚚</div>
+                <h3>Supplier Orders</h3>
+                <p>Passer des commandes aux fournisseurs directement depuis l'application. Suivi de livraison et gestion des stocks.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Analytics & Reports</h3>
+                <p>Rapports détaillés sur les ventes, le stock et les performances. Visualisation graphique des données importantes.</p>
+            </div>
+        </div>
+        
+        <div class="screens-section">
+            <h2>📱 Aperçu des Écrans</h2>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="showScreen('home')">🏠 Home</button>
+                <button class="tab" onclick="showScreen('stock')">📦 Stock</button>
+                <button class="tab" onclick="showScreen('prescriptions')">📋 Prescriptions</button>
+                <button class="tab" onclick="showScreen('alerts')">⚠️ Alerts</button>
+                <button class="tab" onclick="showScreen('sales')">💰 Sales</button>
+            </div>
+            
+            <div class="phone-mockup">
+                <!-- Home Screen -->
+                <div id="home" class="screen-content active">
+                    <div class="screen">
+                        <div class="app-bar">
+                            <h3>Pharmacy Dashboard</h3>
+                            <span>🔔 👤</span>
+                        </div>
+                        <div class="screen-body">
+                            <div class="stat-cards">
+                                <div class="stat-card">
+                                    <div class="stat-icon">📦</div>
+                                    <div class="stat-value">1,245</div>
+                                    <div class="stat-label">Total Stock</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon">⚠️</div>
+                                    <div class="stat-value">23</div>
+                                    <div class="stat-label">Expiring Soon</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon">💰</div>
+                                    <div class="stat-value">$2,340</div>
+                                    <div class="stat-label">Today Sales</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-icon">📋</div>
+                                    <div class="stat-value">45</div>
+                                    <div class="stat-label">Prescriptions</div>
+                                </div>
+                            </div>
+                            
+                            <h4 style="margin: 20px 0 10px 0; color: #00796B;">Recent Activity</h4>
+                            <div class="list-item">
+                                <div class="list-item-title">🛍️ Sale completed</div>
+                                <div class="list-item-subtitle">Aspirin 500mg - $12.50 • 5 min ago</div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-item-title">⚠️ Expiry alert</div>
+                                <div class="list-item-subtitle">Ibuprofen batch #B2341 expires in 7 days</div>
+                            </div>
+                        </div>
+                        <div class="bottom-nav">
+                            <div class="nav-item active">🏠<br>Home</div>
+                            <div class="nav-item">📦<br>Stock</div>
+                            <div class="nav-item">📋<br>Rx</div>
+                            <div class="nav-item">💰<br>Sales</div>
+                            <div class="nav-item">⚠️<br>Alerts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stock Screen -->
+                <div id="stock" class="screen-content">
+                    <div class="screen">
+                        <div class="app-bar">
+                            <h3>Stock Management</h3>
+                            <span>📷</span>
+                        </div>
+                        <div class="screen-body">
+                            <div class="list-item">
+                                <div class="list-item-title">Aspirin 500mg</div>
+                                <div class="list-item-subtitle">Batch: B2023-001 • Expires: 2026-12-31</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-success">150 units</span>
+                                    <span style="float: right; font-weight: bold; color: #00796B;">$12.50</span>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-item-title">Ibuprofen 400mg</div>
+                                <div class="list-item-subtitle">Batch: B2023-045 • Expires: 2025-03-15</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-warning">45 units</span>
+                                    <span style="float: right; font-weight: bold; color: #00796B;">$15.00</span>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-item-title">Paracetamol 1g</div>
+                                <div class="list-item-subtitle">Batch: B2023-089 • Expires: 2025-02-28</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-critical">12 units</span>
+                                    <span style="float: right; font-weight: bold; color: #00796B;">$8.50</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-nav">
+                            <div class="nav-item">🏠<br>Home</div>
+                            <div class="nav-item active">📦<br>Stock</div>
+                            <div class="nav-item">📋<br>Rx</div>
+                            <div class="nav-item">💰<br>Sales</div>
+                            <div class="nav-item">⚠️<br>Alerts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Prescriptions Screen -->
+                <div id="prescriptions" class="screen-content">
+                    <div class="screen">
+                        <div class="app-bar">
+                            <h3>Prescriptions</h3>
+                            <span>🔍</span>
+                        </div>
+                        <div class="screen-body">
+                            <div class="list-item">
+                                <div class="list-item-title">RX-2024-001</div>
+                                <div class="list-item-subtitle">John Doe • Dr. Sarah Smith</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-warning">Pending</span>
+                                    <span style="float: right; font-size: 12px; color: #666;">2 medicines</span>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-item-title">RX-2024-002</div>
+                                <div class="list-item-subtitle">Jane Wilson • Dr. Michael Brown</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-success">Completed</span>
+                                    <span style="float: right; font-size: 12px; color: #666;">1 medicine</span>
+                                </div>
+                            </div>
+                            <div class="list-item">
+                                <div class="list-item-title">RX-2024-003</div>
+                                <div class="list-item-subtitle">Robert Johnson • Dr. Emily Davis</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge" style="background: #e3f2fd; color: #1976d2;">In Progress</span>
+                                    <span class="badge badge-critical" style="margin-left: 5px;">URGENT</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-nav">
+                            <div class="nav-item">🏠<br>Home</div>
+                            <div class="nav-item">📦<br>Stock</div>
+                            <div class="nav-item active">📋<br>Rx</div>
+                            <div class="nav-item">💰<br>Sales</div>
+                            <div class="nav-item">⚠️<br>Alerts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Alerts Screen -->
+                <div id="alerts" class="screen-content">
+                    <div class="screen">
+                        <div class="app-bar">
+                            <h3>Expiry Alerts</h3>
+                            <span>⚙️</span>
+                        </div>
+                        <div class="screen-body">
+                            <div class="stat-cards" style="margin-bottom: 30px;">
+                                <div class="stat-card" style="border-left: 4px solid #d32f2f;">
+                                    <div class="stat-icon" style="color: #d32f2f;">❗</div>
+                                    <div class="stat-value" style="color: #d32f2f;">2</div>
+                                    <div class="stat-label">Critical</div>
+                                </div>
+                                <div class="stat-card" style="border-left: 4px solid #f57c00;">
+                                    <div class="stat-icon" style="color: #f57c00;">⚠️</div>
+                                    <div class="stat-value" style="color: #f57c00;">1</div>
+                                    <div class="stat-label">Warnings</div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-item" style="border-left: 4px solid #d32f2f;">
+                                <div class="list-item-title">❗ Paracetamol 1g</div>
+                                <div class="list-item-subtitle">Batch: B2023-089 • 12 units</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-critical">23 days</span>
+                                    <span style="float: right; font-size: 11px; color: #d32f2f; font-weight: bold;">Expires: 2025-02-28</span>
+                                </div>
+                            </div>
+                            
+                            <div class="list-item" style="border-left: 4px solid #f57c00;">
+                                <div class="list-item-title">⚠️ Ibuprofen 400mg</div>
+                                <div class="list-item-subtitle">Batch: B2023-045 • 45 units</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-warning">38 days</span>
+                                    <span style="float: right; font-size: 11px; color: #f57c00; font-weight: bold;">Expires: 2025-03-15</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-nav">
+                            <div class="nav-item">🏠<br>Home</div>
+                            <div class="nav-item">📦<br>Stock</div>
+                            <div class="nav-item">📋<br>Rx</div>
+                            <div class="nav-item">💰<br>Sales</div>
+                            <div class="nav-item active">⚠️<br>Alerts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sales Screen -->
+                <div id="sales" class="screen-content">
+                    <div class="screen">
+                        <div class="app-bar">
+                            <h3>Sales</h3>
+                            <span>📊</span>
+                        </div>
+                        <div class="screen-body">
+                            <div style="background: linear-gradient(135deg, #00796B, #004D40); padding: 20px; border-radius: 12px; text-align: center; color: white; margin-bottom: 20px;">
+                                <div style="opacity: 0.8; font-size: 14px;">Today's Sales</div>
+                                <div style="font-size: 32px; font-weight: bold; margin: 10px 0;">$2,340</div>
+                                <div style="opacity: 0.8; font-size: 12px;">3 transactions</div>
+                            </div>
+                            
+                            <div class="list-item">
+                                <div class="list-item-title">SALE-001 • John Doe</div>
+                                <div class="list-item-subtitle">2024-02-05 14:30 • 2 items</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge badge-success">Cash</span>
+                                    <span style="float: right; font-weight: bold; color: #00796B; font-size: 18px;">$33.50</span>
+                                </div>
+                            </div>
+                            
+                            <div class="list-item">
+                                <div class="list-item-title">SALE-002 • Jane Smith</div>
+                                <div class="list-item-subtitle">2024-02-05 13:15 • 1 item</div>
+                                <div style="margin-top: 8px;">
+                                    <span class="badge" style="background: #e3f2fd; color: #1976d2;">Card</span>
+                                    <span style="float: right; font-weight: bold; color: #00796B; font-size: 18px;">$15.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-nav">
+                            <div class="nav-item">🏠<br>Home</div>
+                            <div class="nav-item">📦<br>Stock</div>
+                            <div class="nav-item">📋<br>Rx</div>
+                            <div class="nav-item active">💰<br>Sales</div>
+                            <div class="nav-item">⚠️<br>Alerts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tech-stack">
+            <h2>🛠️ Technologies Utilisées</h2>
+            <div class="tech-tags">
+                <span class="tech-tag">Flutter</span>
+                <span class="tech-tag">Dart</span>
+                <span class="tech-tag">Material Design</span>
+                <span class="tech-tag">QR Code Scanner</span>
+                <span class="tech-tag">Local Notifications</span>
+                <span class="tech-tag">REST API</span>
+                <span class="tech-tag">State Management</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.screen-content').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected screen
+            document.getElementById(screenId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

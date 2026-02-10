@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: pharmacy_mysql
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: pharmacydb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+  backend:
+    build: .
+    container_name: pharmacy_backend
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+
+volumes:
+  mysqldata:

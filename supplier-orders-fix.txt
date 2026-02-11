@@ -1,0 +1,21 @@
+// Fichier corrigé pour SupplierOrders.tsx
+// Correction de la ligne 104 : suppression de l'ID générée par Date.now()
+
+// Ligne 103-104 ORIGINAL (PROBLÉMATIQUE) :
+// const newOrder: SupplierOrder = {
+//   id: Date.now().toString(),
+
+// CORRECTION :
+const newOrder: Partial<SupplierOrder> = {
+  // id: undefined, // Laisser le backend générer l'ID automatiquement
+  orderNumber: `CMD${Date.now()}`,
+  supplierId,
+  supplierName: supplier?.name || '',
+  date: new Date().toISOString().split('T')[0],
+  manufacturingDate: formData.get('manufacturingDate') as string || undefined,
+  receivedDate: formData.get('receivedDate') as string || undefined,
+  expectedDelivery: formData.get('expectedDelivery') as string,
+  status: 'pending' as const,
+  items: finalItems,
+  total: finalItems.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0)
+};

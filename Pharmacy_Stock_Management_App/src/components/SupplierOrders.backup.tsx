@@ -100,8 +100,8 @@ export function SupplierOrders() {
     const supplierId = formData.get('supplierId') as string;
     const supplier = suppliers.find(s => s.id === supplierId);
 
-    const newOrder: Partial<SupplierOrder> = {
-      // id: Date.now().toString(), // Supprimé - laisser backend générer
+    const newOrder: SupplierOrder = {
+      id: Date.now().toString(),
       orderNumber: `CMD${Date.now()}`,
       supplierId,
       supplierName: supplier?.name || '',

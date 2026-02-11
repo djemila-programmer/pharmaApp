@@ -10,13 +10,25 @@
     }
   ],
   "routes": [
+    { "handle": "filesystem" },
     {
       "src": "/(.*)",
       "dest": "/index.html"
     }
   ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    }
+  ],
   "env": {
-    "REACT_APP_API_URL": "https://VOTRE_BACKEND_VERCEL_URL",
+    "REACT_APP_API_URL": "https://pharma-app-uahz.vercel.app",
     "REACT_APP_CURRENCY": "FCFA"
   }
 }

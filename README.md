@@ -78,7 +78,6 @@ docker-compose up --build
 ## 🔐 Comptes de Test
 
 - **Administrateur** : admin / admin123
-- **Pharmacien** : pharmacist / pharma123
 
 ## 📱 Intégration Mobile
 

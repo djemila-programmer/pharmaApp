@@ -77,7 +77,7 @@ docker-compose up --build
 
 ## 🔐 Comptes de Test
 
-- **Administrateur** : admin / admin123
+- **Administrateur** : admin / admin@123
 
 ## 📱 Intégration Mobile
 
